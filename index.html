@@ -334,7 +334,7 @@
         }
 
         /* =========================================
-           7. CTA SECTION
+           7. CTA SECTION (UPDATED FOR CENTERING)
            ========================================= */
         .cta { margin: 80px 0; }
 
@@ -343,7 +343,14 @@
             border: 1px solid var(--border-glass);
             border-radius: 30px;
             padding: 60px 24px;
+            
+            /* -- PERBAIKAN POSISI -- */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Memaksa semua item di tengah secara horizontal */
+            justify-content: center; /* Memaksa semua item di tengah secara vertikal */
             text-align: center;
+            
             position: relative;
             overflow: hidden;
             backdrop-filter: blur(20px);
@@ -354,6 +361,7 @@
             margin-bottom: 16px; 
             font-size: clamp(1.8rem, 3vw, 2.5rem);
             color: var(--text-main);
+            width: 100%; /* Memastikan lebar penuh agar text-align center bekerja */
         }
         
         .cta-box p {
@@ -361,7 +369,8 @@
             margin-bottom: 32px;
             font-size: 1rem;
             max-width: 600px;
-            margin-left: auto;
+            /* Margin auto tetap disimpan untuk fallback */
+            margin-left: auto; 
             margin-right: auto;
         }
 
