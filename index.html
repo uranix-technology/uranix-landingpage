@@ -1,35 +1,54 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="Uranix - Jasa Pembuatan Website & Solusi IT Terbaik.">
-    <title>Uranix | Modern IT Solutions</title>
+    <meta name="description" content="Uranix - Mitra Transformasi Digital Terpercaya. Jasa Pembuatan Website, Aplikasi & Konsultasi IT.">
+    <title>Uranix | Your Digital Partner</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
         /* =========================================
-           1. VARIABLES & RESET
+           1. VARIABLES & THEMES
            ========================================= */
         :root {
-            --bg-dark: #02040a;
+            /* Common Colors */
             --primary: #2563EB;
             --primary-light: #3B82F6;
-            --primary-glow: #60A5FA;
             --accent: #06B6D4;
+            
+            /* Dark Theme (Default) */
+            --bg-body: #02040a;
+            --bg-glass: rgba(15, 23, 42, 0.6);
+            --border-glass: rgba(56, 189, 248, 0.15);
             --text-main: #F8FAFC;
             --text-muted: #94A3B8;
-            --glass-bg: rgba(15, 23, 42, 0.6);
-            --glass-border: rgba(56, 189, 248, 0.15);
+            --card-hover: rgba(30, 41, 59, 0.7);
+            --shadow-color: rgba(0,0,0,0.5);
+            --blob-opacity: 0.4;
+            --cta-gradient: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.8));
         }
 
+        /* Light Theme Configuration */
+        [data-theme="light"] {
+            --bg-body: #F1F5F9;
+            --bg-glass: rgba(255, 255, 255, 0.7);
+            --border-glass: rgba(37, 99, 235, 0.1);
+            --text-main: #0F172A;
+            --text-muted: #475569;
+            --card-hover: rgba(255, 255, 255, 0.95);
+            --shadow-color: rgba(148, 163, 184, 0.4);
+            --blob-opacity: 0.6;
+            --cta-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(241, 245, 249, 0.9));
+        }
+
+        /* Reset & Base */
         * {
             margin: 0;
             padding: 0;
@@ -37,24 +56,18 @@
             -webkit-tap-highlight-color: transparent;
         }
         
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg-dark);
+            background-color: var(--bg-body);
             color: var(--text-main);
             overflow-x: hidden;
             line-height: 1.6;
-            background-image: 
-                radial-gradient(circle at 0% 0%, rgba(37, 99, 235, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 100% 100%, rgba(6, 182, 212, 0.08) 0%, transparent 50%);
+            transition: background-color 0.5s ease, color 0.5s ease;
         }
 
-        h1, h2, h3, .logo {
-            font-family: 'Outfit', sans-serif;
-        }
+        h1, h2, h3, .logo { font-family: 'Outfit', sans-serif; }
 
         .container {
             width: 100%;
@@ -64,7 +77,57 @@
         }
 
         /* =========================================
-           2. COMPONENT: BUTTONS
+           2. ANIMATED BACKGROUND
+           ========================================= */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: var(--blob-opacity);
+            transition: opacity 0.5s ease;
+        }
+
+        .blob-1 {
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.4) 0%, transparent 70%);
+            top: -10%;
+            left: -10%;
+            animation: moveBlob1 15s infinite alternate;
+        }
+
+        .blob-2 {
+            width: 40vw;
+            height: 40vw;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.3) 0%, transparent 70%);
+            bottom: -10%;
+            right: -10%;
+            animation: moveBlob2 20s infinite alternate;
+        }
+
+        @keyframes moveBlob1 {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(100px, 50px); }
+        }
+
+        @keyframes moveBlob2 {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-80px, -40px); }
+        }
+
+        /* =========================================
+           3. COMPONENTS
            ========================================= */
         .btn {
             display: inline-flex;
@@ -78,33 +141,13 @@
             font-size: 0.95rem;
             transition: all 0.3s ease;
             cursor: pointer;
-            white-space: nowrap;
-            position: relative;
-            overflow: hidden;
+            border: none;
         }
 
         .btn-primary {
             background: linear-gradient(90deg, var(--primary), #1D4ED8);
             color: #fff;
             box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        /* Efek kilat (Sheen Effect) */
-        .btn-primary::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(to bottom right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 100%);
-            transform: rotate(45deg) translateY(-100%);
-            transition: all 0.5s;
-        }
-
-        .btn-primary:hover::after {
-            transform: rotate(45deg) translateY(0);
         }
 
         .btn-primary:hover {
@@ -117,17 +160,38 @@
             font-weight: 500;
             margin-left: 15px;
             transition: 0.3s;
-            display: inline-flex;
-            align-items: center;
         }
 
         .btn-outline:hover {
-            color: #fff;
+            color: var(--text-main);
             transform: translateX(5px);
         }
 
+        /* Theme Switcher */
+        .theme-switch {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-right: 15px;
+            color: var(--text-main);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .theme-switch:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
         /* =========================================
-           3. NAVBAR
+           4. NAVBAR
            ========================================= */
         nav {
             position: fixed;
@@ -135,10 +199,11 @@
             width: 100%;
             padding: 15px 0;
             z-index: 1000;
-            background: rgba(2, 4, 10, 0.8);
+            background: rgba(var(--bg-body), 0.8); /* Fallback */
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--border-glass);
+            transition: background 0.5s;
         }
 
         nav .container {
@@ -150,16 +215,19 @@
         .logo {
             font-size: 1.5rem;
             font-weight: 800;
-            color: #fff;
+            color: var(--text-main);
             letter-spacing: -0.5px;
         }
 
-        .logo span {
-            color: var(--primary-light);
+        .logo span { color: var(--primary-light); }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
         }
 
         /* =========================================
-           4. HERO SECTION
+           5. HERO SECTION
            ========================================= */
         .hero {
             min-height: 100vh;
@@ -167,29 +235,8 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 100px 0 60px;
+            padding: 120px 0 60px;
             position: relative;
-            overflow: hidden;
-        }
-
-        /* Ambient Background Animation */
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 80%;
-            height: 80%;
-            background: radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, transparent 60%);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: -1;
-            filter: blur(80px);
-            animation: pulseAccent 8s ease-in-out infinite alternate;
-        }
-
-        @keyframes pulseAccent {
-            0% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.8); }
-            100% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
         }
 
         .hero h1 {
@@ -198,7 +245,8 @@
             margin-bottom: 24px;
             font-weight: 800;
             letter-spacing: -1px;
-            background: linear-gradient(135deg, #fff 30%, var(--primary-glow) 100%);
+            /* Gradient Text Logic */
+            background: linear-gradient(135deg, var(--text-main) 30%, var(--primary-light) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -211,22 +259,12 @@
         }
 
         /* =========================================
-           5. SERVICES SECTION
+           6. SERVICES SECTION
            ========================================= */
-        .services {
-            padding: 80px 0;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-header h2 {
-            font-size: clamp(2rem, 3vw, 2.8rem);
-            margin-bottom: 12px;
-        }
-
+        .services { padding: 80px 0; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: clamp(2rem, 3vw, 2.8rem); margin-bottom: 12px; }
+        
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -234,45 +272,22 @@
         }
 
         .card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
             border-radius: 24px;
             padding: 32px;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
         }
 
         .card:hover {
             transform: translateY(-10px);
-            border-color: rgba(59, 130, 246, 0.5);
-            background: rgba(30, 41, 59, 0.7);
-            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5);
-        }
-
-        .card::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border-radius: 24px;
-            padding: 2px;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), transparent);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
-            opacity: 0;
-            transition: 0.4s;
-        }
-
-        .card:hover::after {
-            opacity: 1;
+            border-color: var(--primary);
+            background: var(--card-hover);
+            box-shadow: 0 20px 40px -10px var(--shadow-color);
         }
 
         .icon-box {
@@ -286,7 +301,7 @@
             margin-bottom: 24px;
             color: var(--primary-light);
             font-size: 1.5rem;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: 0.4s;
         }
 
         .card:hover .icon-box {
@@ -295,21 +310,16 @@
             transform: scale(1.1) rotate(5deg);
         }
 
-        .card h3 {
-            font-size: 1.35rem;
-            margin-bottom: 12px;
-            color: #fff;
-        }
-
-        .card p {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
+        .card h3 { font-size: 1.35rem; margin-bottom: 12px; color: var(--text-main); }
+        .card p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; }
 
         .card.highlight-card {
-            background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.2), transparent 70%), var(--glass-bg);
-            border-color: rgba(59, 130, 246, 0.5);
+            background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.15), transparent 70%), var(--bg-glass);
+            border-color: rgba(59, 130, 246, 0.4);
+        }
+        
+        [data-theme="light"] .card.highlight-card {
+             background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.1), transparent 70%), #fff;
         }
 
         .tag-popular {
@@ -322,54 +332,53 @@
             font-weight: 700;
             padding: 6px 12px;
             border-radius: 30px;
-            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
         }
 
         /* =========================================
-           6. CTA SECTION
+           7. CTA SECTION
            ========================================= */
-        .cta {
-            margin: 80px 0;
-        }
+        .cta { margin: 80px 0; }
 
         .cta-box {
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.8));
-            border: 1px solid var(--glass-border);
+            background: var(--cta-gradient);
+            border: 1px solid var(--border-glass);
             border-radius: 30px;
             padding: 60px 24px;
             text-align: center;
             position: relative;
             overflow: hidden;
             backdrop-filter: blur(20px);
+            box-shadow: 0 20px 50px -10px var(--shadow-color);
         }
-
-        .cta-box::before {
-             content: '';
-             position: absolute;
-             top: 0;
-             left: 0;
-             width: 100%;
-             height: 100%;
-             background: radial-gradient(circle at 50% -30%, rgba(59, 130, 246, 0.2), transparent 70%);
-             pointer-events: none;
+        
+        .cta-box h2 {
+            margin-bottom: 16px; 
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            color: var(--text-main);
+        }
+        
+        .cta-box p {
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            font-size: 1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         /* =========================================
-           7. FOOTER & FLOAT BUTTON
+           8. FOOTER & FLOAT BUTTON
            ========================================= */
         footer {
-            border-top: 1px solid var(--glass-border);
+            border-top: 1px solid var(--border-glass);
             padding: 40px 0;
             text-align: center;
             font-size: 0.9rem;
             color: var(--text-muted);
+            background: rgba(2, 4, 10, 0.3);
         }
         
-        /* Tambahan style untuk divider footer */
-        .footer-divider {
-            margin: 0 8px;
-            opacity: 0.4;
-        }
+        [data-theme="light"] footer { background: rgba(255,255,255,0.5); }
 
         .socials {
             margin-top: 20px;
@@ -385,7 +394,7 @@
         }
 
         .socials a:hover {
-            color: var(--primary-light);
+            color: var(--primary);
             transform: translateY(-3px);
         }
 
@@ -405,13 +414,11 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             z-index: 2000;
             text-decoration: none;
-            border: 2px solid rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
             animation: pulseWA 2s infinite;
         }
 
-        .wa-float:hover {
-            transform: scale(1.1);
-        }
+        .wa-float:hover { transform: scale(1.1); }
 
         @keyframes pulseWA {
             0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
@@ -420,80 +427,67 @@
         }
 
         /* =========================================
-           8. MOBILE RESPONSIVE
+           9. RESPONSIVE
            ========================================= */
         @media (max-width: 768px) {
-            nav .btn {
-                padding: 10px 20px;
-                font-size: 0.85rem;
-            }
+            nav .btn { padding: 8px 16px; font-size: 0.8rem; }
+            .theme-switch { width: 35px; height: 35px; margin-right: 10px; }
             
-            .hero {
-                padding-top: 120px;
-                padding-bottom: 60px;
-                min-height: auto;
-            }
-            
-            .services-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .card {
-                padding: 24px;
-            }
-            
-            .cta-box {
-                padding: 50px 20px;
-            }
+            .hero { padding-top: 140px; padding-bottom: 60px; min-height: auto; }
+            .services-grid { grid-template-columns: 1fr; gap: 20px; }
+            .card { padding: 24px; }
+            .cta-box { padding: 40px 20px; }
             
             .hero-cta {
                 display: flex;
                 flex-direction: column;
-                gap: 20px;
+                gap: 15px;
                 align-items: center;
                 width: 100%;
             }
+            .btn-outline { margin-left: 0; }
             
-            .btn-outline {
-                margin-left: 0;
-            }
-            
-            .wa-float {
-                width: 55px;
-                height: 55px;
-                font-size: 26px;
-                bottom: 25px;
-                right: 25px;
-            }
+            .wa-float { width: 55px; height: 55px; font-size: 26px; bottom: 25px; right: 25px; }
         }
     </style>
 </head>
 <body>
 
+    <div class="bg-animation">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
     <nav>
         <div class="container">
             <div class="logo">Uranix<span>.</span></div>
-            <a href="https://wa.me/6289665119793?text=Halo%20Uranix" class="btn btn-primary">
-                Hubungi Kami
-            </a>
+            
+            <div class="nav-actions">
+                <button class="theme-switch" id="theme-toggle" aria-label="Toggle Theme">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+
+                <a href="https://wa.me/6289665119793?text=Halo%20Uranix,%20saya%20ingin%20konsultasi" class="btn btn-primary">
+                    Hubungi
+                </a>
+            </div>
         </div>
     </nav>
 
     <section class="hero">
         <div class="container">
             <h1 data-aos="fade-up" data-aos-duration="1000">
-                Solusi Digital untuk
-                UMKM & Mahasiswa<br>Profesional.
+                Mitra Teknologi untuk<br>
+                Bisnis & Akademik Anda.
             </h1>
             
             <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-                Jasa pembuatan website, perbaikan sistem error, hingga bantuan tugas coding Skripsi/Tugas Akhir. Cepat, aman, dan harga bersahabat.
+                Uranix hadir sebagai solusi IT profesional. Kami membantu UMKM Go Digital dan mendampingi Mahasiswa dalam pengembangan software Tugas Akhir.
             </p>
             
             <div class="hero-cta" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
                 <a href="#layanan" class="btn btn-primary">
-                    Lihat Layanan
+                    Jelajahi Solusi
                 </a>
                 <a href="https://wa.me/6289665119793" class="btn-outline">
                     Konsultasi Gratis <i class="fa-solid fa-arrow-right" style="font-size: 0.8em; margin-left: 5px;"></i>
@@ -505,46 +499,46 @@
     <section id="layanan" class="services">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
-                <h2>Layanan Kami</h2>
-                <p style="color: var(--text-muted); font-size: 1rem;">Kualitas Agency, Harga Freelance.</p>
+                <h2>Layanan Profesional</h2>
+                <p style="color: var(--text-muted); font-size: 1rem;">Kualitas Agensi, Fleksibilitas Tinggi.</p>
             </div>
 
             <div class="services-grid">
                 <div class="card" data-aos="fade-up" data-aos-delay="0">
                     <div class="icon-box"><i class="fa-solid fa-code"></i></div>
                     <h3>Web Development</h3>
-                    <p>Pembuatan website Company Profile, Landing Page, atau Portfolio yang modern dan responsif di semua perangkat.</p>
+                    <p>Pengembangan website Company Profile, Landing Page, dan Portal Berita yang responsif, cepat, dan SEO-friendly.</p>
                 </div>
 
                 <div class="card" data-aos="fade-up" data-aos-delay="100">
                     <div class="icon-box"><i class="fa-solid fa-store"></i></div>
-                    <h3>E-Commerce</h3>
-                    <p>Toko online siap pakai dengan fitur keranjang belanja, checkout WhatsApp, dan manajemen produk yang mudah.</p>
+                    <h3>E-Commerce Solutions</h3>
+                    <p>Sistem toko online terintegrasi dengan WhatsApp Checkout atau Payment Gateway untuk meningkatkan penjualan Anda.</p>
                 </div>
 
                 <div class="card highlight-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="tag-popular">Best Seller</div>
+                    <div class="tag-popular">Akademik</div>
                     <div class="icon-box"><i class="fa-solid fa-graduation-cap"></i></div>
-                    <h3>Tugas Coding & Skripsi</h3>
-                    <p>Buntu coding PHP, Laravel, HTML/CSS? Kami bantu kerjakan tugas kuliah atau skripsi lengkap dengan penjelasannya.</p>
+                    <h3>Bimbingan Skripsi & IT</h3>
+                    <p>Mentoring pembuatan aplikasi Skripsi/TA (Web/Mobile). Kami bantu coding, flowchart, hingga pemahaman logika program.</p>
                 </div>
 
                 <div class="card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="icon-box"><i class="fa-solid fa-bug"></i></div>
-                    <h3>Fix Error & Bug</h3>
-                    <p>Website error, database tidak connect, atau tampilan berantakan? Kami perbaiki masalah teknis Anda dengan cepat.</p>
+                    <div class="icon-box"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                    <h3>System Maintenance</h3>
+                    <p>Perbaikan bug, error handling, optimasi kecepatan database, dan maintenance rutin agar website tetap prima.</p>
                 </div>
 
                 <div class="card" data-aos="fade-up" data-aos-delay="400">
-                    <div class="icon-box"><i class="fa-solid fa-sliders"></i></div>
-                    <h3>Custom Features</h3>
-                    <p>Butuh fitur tambahan? Kami bisa buatkan Admin Panel, Form Input, Report PDF, dan integrasi fitur lainnya.</p>
+                    <div class="icon-box"><i class="fa-solid fa-layer-group"></i></div>
+                    <h3>Custom Software</h3>
+                    <p>Pembuatan sistem informasi kustom: Sistem Inventaris, Point of Sales (Kasir), E-Raport, hingga Sistem Manajemen Sekolah.</p>
                 </div>
 
                 <div class="card" data-aos="fade-up" data-aos-delay="500">
                     <div class="icon-box"><i class="fa-solid fa-server"></i></div>
-                    <h3>Hosting & Domain</h3>
-                    <p>Bantu instalasi server (Hosting/VPS) dan domain agar website Anda online dan bisa diakses dari mana saja.</p>
+                    <h3>Infrastructure</h3>
+                    <p>Jasa setup Hosting, VPS (Linux/Windows), manajemen DNS, dan instalasi SSL untuk keamanan data website Anda.</p>
                 </div>
             </div>
         </div>
@@ -552,12 +546,12 @@
 
     <div class="container cta">
         <section class="cta-box" data-aos="zoom-in-up" data-aos-duration="800">
-            <h2 style="margin-bottom: 16px; font-size: clamp(1.8rem, 3vw, 2.5rem);">Siap Wujudkan Projekmu?</h2>
-            <p style="color: #94a3b8; margin-bottom: 32px; font-size: 1rem; max-width: 600px; margin-left: auto; margin-right: auto;">
-                Jangan ragu untuk konsultasi kebutuhanmu sekarang. Respon cepat, ramah, dan solutif untuk kebutuhan digitalmu.
+            <h2>Mulai Transformasi Digital</h2>
+            <p>
+                Setiap ide besar membutuhkan eksekusi yang tepat. Diskusikan kebutuhan proyek Anda bersama tim teknis Uranix hari ini.
             </p>
             <a href="https://wa.me/6289665119793?text=Halo%20Uranix,%20saya%20tertarik%20bekerjasama" class="btn btn-primary" style="padding: 15px 35px; font-size: 1rem;">
-                <i class="fa-brands fa-whatsapp"></i> Chat Sekarang
+                <i class="fa-brands fa-whatsapp"></i> Hubungi Tim Kami
             </a>
         </section>
     </div>
@@ -565,14 +559,12 @@
     <footer>
         <div class="container" data-aos="fade-in" data-aos-delay="200">
             <p>
-                &copy; 2026 Uranix. All Rights Reserved. 
-                <span class="footer-divider">|</span> 
-                Powered by Uranix
+                &copy; 2026 Uranix Technology. All Rights Reserved. 
             </p>
             <div class="socials">
                 <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#"><i class="fa-brands fa-github"></i></a>
                 <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="#"><i class="fa-brands fa-github"></i></a>
             </div>
         </div>
     </footer>
@@ -583,11 +575,50 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        // Init Animation on Scroll
         AOS.init({
             once: true,
             duration: 800,
             easing: 'ease-in-out-cubic',
         });
+
+        // Dark/Light Mode Logic
+        const toggleBtn = document.getElementById('theme-toggle');
+        const icon = toggleBtn.querySelector('i');
+        const html = document.documentElement;
+
+        // Check saved theme or system preference
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme) {
+            html.setAttribute('data-theme', savedTheme);
+            updateIcon(savedTheme);
+        } else if (!systemPrefersDark) {
+            // If system prefers light, set light default
+            html.setAttribute('data-theme', 'light');
+            updateIcon('light');
+        }
+
+        // Toggle Event
+        toggleBtn.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+
+        function updateIcon(theme) {
+            if (theme === 'light') {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
     </script>
 
 </body>
